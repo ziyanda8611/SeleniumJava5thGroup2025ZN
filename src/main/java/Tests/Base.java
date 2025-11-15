@@ -16,6 +16,7 @@ public class Base {
     LearningMaterialPage learningMaterialPage = PageFactory.initElements(driver, LearningMaterialPage.class);
     WebAutomationAdvancePage webAutomationAdvancePage = PageFactory.initElements(driver, WebAutomationAdvancePage.class);
     LogoutPage logoutPage = PageFactory.initElements(driver,LogoutPage.class);
+    SignUpPage signUpPage = PageFactory.initElements(driver,SignUpPage.class);
     TakeScreenshots takeScreenshots = new TakeScreenshots();
 
 }
