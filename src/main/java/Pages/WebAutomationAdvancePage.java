@@ -1,6 +1,7 @@
 package Pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -21,17 +22,26 @@ public class WebAutomationAdvancePage {
     @FindBy(id = "tab-btn-web")
     WebElement web_automation_tab;
 
-    @FindBy(id = "deviceType")
-    WebElement deviceType_id;
+    @FindBy(id = "storage-64GB")
+    WebElement storage_radio_btn;
 
-    @FindBy(id = "brand")
-    WebElement tabletBrand_id;
+    @FindBy(id = "shipping-standard")
+    WebElement shipping_method_radio_btn;
 
-    @FindBy(id = "color")
-    WebElement color_id;
+    @FindBy(id = "warranty-1yr")
+    WebElement one_year_warranty_radio_btn;
+
+    @FindBy(id = "discount-code")
+    WebElement discount_code_input;
+
+    @FindBy(id = "apply-discount-btn")
+    WebElement apply_btn;
 
     @FindBy(id = "inventory-next-btn")
     WebElement next_btn;
+
+    @FindBy(id = "discount-feedback")
+    WebElement discount_messgae;
 
 
 
@@ -84,6 +94,7 @@ public class WebAutomationAdvancePage {
 
     public void addQuantity(String quantity) {
 
+        quantity_id.clear();
         quantity_id.sendKeys(quantity);
     }
 
@@ -92,8 +103,51 @@ public class WebAutomationAdvancePage {
         email_id.sendKeys(address);
     }
 
+    public void clickStoragebtn() {
+
+        storage_radio_btn.click();
+    }
+
     public void clickNextBtn() {
         next_btn.click();
+    }
+
+    public void clickRemoveBtn() {
+
+        WebElement element = driver.findElement(By.xpath("//button[normalize-space()='Remove']"));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+        element.click();
+    }
+
+    public void clickAddToCart() {
+
+        WebElement element = driver.findElement(By.id("add-to-cart-btn"));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+        element.click();
+    }
+
+    public void clickShippingMethod(){
+        shipping_method_radio_btn.click();
+    }
+
+    public void clickWarrantyDuration(){
+        one_year_warranty_radio_btn.click();
+    }
+
+    public void enterDiscountCode(String discountCode){
+        discount_code_input.sendKeys(discountCode);
+    }
+
+    public void clearDiscountCode(){
+        discount_code_input.clear();
+    }
+
+    public void clickApplyBtn(){
+        apply_btn.click();
+    }
+
+    public void isDiscountMessageDisplayed(){
+        discount_messgae.isDisplayed();
     }
 
 }

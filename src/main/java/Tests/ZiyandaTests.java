@@ -192,13 +192,85 @@ public class ZiyandaTests extends Base{
         webAutomationAdvancePage.verifyInventoryHeaderIsDisplayed();
         webAutomationAdvancePage.selectDeviceType("Phone");
         webAutomationAdvancePage.selectTabletBrand("Apple");
+        webAutomationAdvancePage.clickStoragebtn();
         webAutomationAdvancePage.selectColor("Black");
-        webAutomationAdvancePage.addQuantity("2");
+        webAutomationAdvancePage.addQuantity("1");
         webAutomationAdvancePage.addressInput("21 Jackal Creek");
         webAutomationAdvancePage.clickNextBtn();
 
     }
 
+
+    @Test(dependsOnMethods = "validatePricing")
+    public void removeItemFromCart () throws InterruptedException {
+
+        webAutomationAdvancePage.clickAddToCart();
+        Thread.sleep(2000);
+        webAutomationAdvancePage.clickRemoveBtn();
+    }
+
+    @Test(dependsOnMethods = "removeItemFromCart")
+    public void addExtrasAndPricing (){
+
+        webAutomationAdvancePage.selectDeviceType("Phone");
+        webAutomationAdvancePage.selectTabletBrand("Apple");
+        webAutomationAdvancePage.clickStoragebtn();
+        webAutomationAdvancePage.selectColor("Black");
+        webAutomationAdvancePage.addQuantity("1");
+        webAutomationAdvancePage.addressInput("21 Jackal Creek");
+        webAutomationAdvancePage.clickNextBtn();
+
+        //add Extras
+        webAutomationAdvancePage.clickWarrantyDuration();
+        webAutomationAdvancePage.enterDiscountCode("SAV10");
+        webAutomationAdvancePage.clickApplyBtn();
+
+    }
+
+    @Test(dependsOnMethods = "addExtrasAndPricing")
+    public void addDiscountCodes () throws InterruptedException {
+
+        //add Extras
+        webAutomationAdvancePage.clearDiscountCode();
+        webAutomationAdvancePage.enterDiscountCode("SAV10");
+        webAutomationAdvancePage.clearDiscountCode();
+        webAutomationAdvancePage.enterDiscountCode("SAV20");
+        webAutomationAdvancePage.clearDiscountCode();
+        webAutomationAdvancePage.enterDiscountCode("VOUCHER");
+        webAutomationAdvancePage.clickApplyBtn();
+        Thread.sleep(2000);
+        webAutomationAdvancePage.isDiscountMessageDisplayed();
+        webAutomationAdvancePage.clearDiscountCode();
+        Thread.sleep(2000);
+        webAutomationAdvancePage.clickApplyBtn();
+
+    }
+
+    @Test(dependsOnMethods = "addDiscountCodes")
+    public void addMultipleItemToCart () throws InterruptedException {
+
+        //add Extras
+        webAutomationAdvancePage.clearDiscountCode();
+        webAutomationAdvancePage.enterDiscountCode("SAV20");
+        webAutomationAdvancePage.clickApplyBtn();
+        Thread.sleep(1500);
+        webAutomationAdvancePage.clickAddToCart();
+
+        //add second device
+        webAutomationAdvancePage.selectDeviceType("Laptop");
+        webAutomationAdvancePage.selectTabletBrand("Macbook pro");
+        webAutomationAdvancePage.clickStoragebtn();
+        webAutomationAdvancePage.selectColor("Black");
+        webAutomationAdvancePage.addQuantity("1");
+        webAutomationAdvancePage.addressInput("21 Jackal Creek");
+        webAutomationAdvancePage.clickNextBtn();
+        Thread.sleep(1500);
+        webAutomationAdvancePage.clickWarrantyDuration();
+        webAutomationAdvancePage.clickApplyBtn();
+        Thread.sleep(1500);
+        webAutomationAdvancePage.clickAddToCart();
+
+    }
 
 
     public static int getRandomNumber(int min, int max) {
